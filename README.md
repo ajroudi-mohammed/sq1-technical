@@ -1,1 +1,2 @@
-# sq1-technical-test
+# Sq1 technical test
+
