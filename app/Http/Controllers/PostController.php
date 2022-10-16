@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\PostRepository;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,11 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(PostRequest $request, PostRepository $postRepository)
     {
         //
+        $postRepository->createPost($request->all());
+        return redirect('dashboard');
     }
 
     /**

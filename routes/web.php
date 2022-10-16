@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     DELETE        /users/{user}               destroy users.destroy */
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('post', PostController::class);
+    Route::resource('posts', PostController::class);
 
 });
 

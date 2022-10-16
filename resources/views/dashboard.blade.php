@@ -25,7 +25,7 @@
 
                             @foreach ($posts as $post )
 
-                                <x-post-component :title="$post->title" :description="$post->description" />
+                                <x-post-row-component :title="$post->title" :description="$post->description" :publishdate="$post->publishdate_at" />
 
                             @endforeach
 

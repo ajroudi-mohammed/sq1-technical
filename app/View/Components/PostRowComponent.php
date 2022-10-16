@@ -4,22 +4,25 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class PostComponent extends Component
+class PostRowComponent extends Component
 {
     public $title;
 
     public $description;
+
+    public $publishdate;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $description)
+    public function __construct($title, $description, $publishdate)
     {
         //
         $this->title = $title;
         $this->description = $description;
+        $this->publishdate = $publishdate;
     }
 
     /**
@@ -30,6 +33,6 @@ class PostComponent extends Component
     public function render()
     {
 
-        return view('components.post-component');
+        return view('components.post-row-component');
     }
 }
