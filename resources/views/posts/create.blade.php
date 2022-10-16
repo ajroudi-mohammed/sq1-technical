@@ -1,0 +1,46 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
+
+    <div class="overflow-x-auto">
+        <div
+            class="min-w-screen min-h-screen bg-gray-100 flex mt-10 justify-center bg-gray-100 font-sans overflow-hidden">
+            <div class="w-full lg:w-5/6">
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                            Title
+                        </label>
+                        <input
+                            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                            id="title" type="text" placeholder="title">
+                    </div>
+
+                    <div class="mb-4 bg-white rounded-t-lg dark:bg-gray-800">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                            Description
+                        </label>
+                        <textarea id="description" rows="4" class="px-0 w-full text-sm text-gray-900 bg-gray-200 appearance-none border-2 border-gray-200 rounded pl-4" placeholder="Write a comment..." required></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <button
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="button">
+                            Create
+                        </button>
+                        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                            href="{{ route('dashboard') }}">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</x-app-layout>

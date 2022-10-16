@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +16,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+require __DIR__.'/auth.php';
+
+
+//Guest routes
+Route::middleware('guest')->group(function () {
+    Route::get('/', [BlogController::class, 'index']);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+//Authenticated routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    /**
+     * a resource generates these routes
+     *
+    Verb          Path                        Action  Route Name
+    GET           /users                      index   users.index
+    GET           /users/create               create  users.create
+    POST          /users                      store   users.store
+    GET           /users/{user}               show    users.show
+    GET           /users/{user}/edit          edit    users.edit
+    PUT|PATCH     /users/{user}               update  users.update
+    DELETE        /users/{user}               destroy users.destroy */
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('post', PostController::class);
+
+});
+

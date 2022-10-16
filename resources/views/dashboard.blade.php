@@ -5,13 +5,36 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+    <div class="overflow-x-auto">
+        <div class="min-w-screen min-h-screen bg-gray-100 flex my-10 justify-center bg-gray-100 font-sans overflow-hidden">
+            <div class="w-full lg:w-5/6">
+                <div class="bg-white shadow-md rounded">
+                    <table class="w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Title</th>
+                                <th class="py-3 px-6 text-left">Description</th>
+                                <th class="py-3 px-6 text-center relative">
+                                    Publication date
+                                    <a href="#" class="absolute ml-2 top-4"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg></a>
+                                </th>
+                                <th class="py-3 px-6 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-light">
+
+                            @foreach ($posts as $post )
+
+                                <x-post-component :title="$post->title" :description="$post->description" />
+
+                            @endforeach
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
+
     </div>
 </x-app-layout>
