@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Auth;
 class PostRepository {
 
     public function getAllPosts(){
-        return Post::all();
+        return Post::paginate(10);
     }
 
-    public function getCurrentUserPosts(){
-        return Post::where('user_id', Auth::id())
-                    ->get();
+    public function getCurrentUserPosts($type = ''){
+        $posts = Post::where('user_id', Auth::id());
+        if( $type )
+            $posts = $posts->orderBy('publishdate_at', $type);
+        return $posts->paginate(10);
     }
 
     public function createPost($attributes){

@@ -74,6 +74,8 @@
 
             @endforeach
 
+            {{ $posts->links() }}
+
 
             <!-- Pagination -->
             <div class="flex items-center py-8">

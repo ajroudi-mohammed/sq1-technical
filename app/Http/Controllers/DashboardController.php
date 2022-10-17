@@ -9,7 +9,8 @@ class DashboardController extends Controller
 {
     public function index(PostRepository $postRepository){
 
-        $posts = $postRepository->getCurrentUserPosts();
+        $orderBy = request('orderBy') === 'asc' ? 'asc' : 'desc';
+        $posts = $postRepository->getCurrentUserPosts($orderBy);
         return view('dashboard')->with(['posts' => $posts]);
     }
 }

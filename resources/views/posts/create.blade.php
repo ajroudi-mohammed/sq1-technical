@@ -9,7 +9,7 @@
         <div
             class="min-w-screen min-h-screen bg-gray-100 flex mt-10 justify-center bg-gray-100 font-sans overflow-hidden">
             <div class="w-full lg:w-5/6">
-                <form action="{{ route('posts.store')}}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post">
+                <form action="/posts" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post">
                     @csrf
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
