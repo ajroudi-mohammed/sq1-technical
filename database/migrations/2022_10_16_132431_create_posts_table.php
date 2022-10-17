@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->longText('description');
+            $table->integer('imported_post_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('publishdate_at');
             $table->timestamps();
