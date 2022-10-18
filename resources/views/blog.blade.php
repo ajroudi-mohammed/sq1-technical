@@ -64,7 +64,7 @@
                         <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{$post->title}}
                             Amet</a>
                         <p href="#" class="text-sm pb-3">
-                            Published {{$post->publishdate_at}}
+                            Published {{$post->publishedAt}}
                         </p>
                         <a href="#" class="pb-6">{{$post->description}}.</a>
                         <a href="#" class="uppercase text-gray-800 hover:text-black">Continue Reading <i

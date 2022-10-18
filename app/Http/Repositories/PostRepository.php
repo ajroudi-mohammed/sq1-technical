@@ -18,7 +18,7 @@ class PostRepository {
         return Cache::remember('cached_posts', 10, function () use ($type) {
             $posts = Post::where('user_id', Auth::id());
             if( $type )
-                $posts = $posts->orderBy('publishdate_at', $type);
+                $posts = $posts->orderBy('publishedAt', $type);
             return $posts->paginate(10);
         });
     }

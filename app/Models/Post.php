@@ -19,7 +19,9 @@ class Post extends Model
     protected $fillable = [
         'title',
         'description',
-        'user_id'
+        'user_id',
+        'imported_post_id',
+        'publishedAt'
     ];
 
 
@@ -30,7 +32,7 @@ class Post extends Model
     /**
      * Date to human readable form
      */
-    protected function publishdateAt(): Attribute
+    protected function publishedAt(): Attribute
     {
         return Attribute::make(
             get: fn ($value) =>  Carbon::createFromTimeStamp(strtotime($value))->diffForHumans(),

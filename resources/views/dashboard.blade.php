@@ -27,7 +27,7 @@
 
                                 <x-post-row-component :title="$post->title"
                                                       :description="$post->description"
-                                                      :publishdate="$post->publishdate_at" />
+                                                      :publishdate="$post->publishedAt" />
 
                             @endforeach
 
