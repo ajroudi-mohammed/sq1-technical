@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('import-posts:hourly')->everyMinute();
+        $schedule->command('import-posts:hourly')->everyThirtyMinutes();
     }
 
     /**

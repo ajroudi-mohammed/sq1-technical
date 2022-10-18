@@ -13,7 +13,7 @@ class PostImportCommand extends Command
     /**
      * SQ1 endpoint
      */
-    protected $API_URL;
+    protected $api_url;
 
     /**
      * The name and signature of the console command.
@@ -50,6 +50,7 @@ class PostImportCommand extends Command
 
         });
 
+        Cache::forget('cached_posts');
         return Post::insert($newPostCol->toArray());
     }
 
@@ -72,10 +73,12 @@ class PostImportCommand extends Command
 
                 //the first insert
                 if( !$imported_posts_ids ){
-                    if( $this->formatAndSavePosts($postsCollection) )
+                    if( $this->formatAndSavePosts($postsCollection) ){
                         $imported_posts_ids = Cache::rememberForever('imported_posts_cache_ids', function () use ($postsCollection) {
                             return $postsCollection->pluck('id');
                         });
+                        return Command::SUCCESS;
+                    }
                 }
 
 
@@ -98,6 +101,7 @@ class PostImportCommand extends Command
                     });
 
                     Post::insert($diffPosts->toArray());
+                    Cache::forget('cached_posts');
 
                     //Update cache
                     $mergedIds = $imported_posts_ids->merge($diff);
