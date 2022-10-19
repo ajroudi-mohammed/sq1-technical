@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\PostRepository;
 use App\Http\Requests\PostRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    private $postRepository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,10 +45,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request, PostRepository $postRepository)
+    public function store(PostRequest $request)
     {
         //
-        $postRepository->createPost($request->all());
+        $this->postRepository->createPost($request->all());
         return redirect('dashboard');
     }
 
@@ -49,9 +58,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( Post $post )
     {
-        //
+        return view('posts.show')->with(['post' => $post]);
     }
 
     /**

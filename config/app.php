@@ -212,4 +212,10 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Post api for importing posts
+    |--------------------------------------------------------------------------*/
+    'post_api_url' => env('API_URL', 'https://candidate-test.sq1.io/api.php'),
+
 ];

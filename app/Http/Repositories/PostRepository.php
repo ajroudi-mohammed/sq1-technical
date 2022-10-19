@@ -12,6 +12,7 @@ class PostRepository {
 
     public function __construct(){
         $this->post_cache_duration = config('cache.cache_post_duration');
+        Cache::forget('cached_posts');
     }
 
     public function getAllPosts(){
@@ -35,4 +36,5 @@ class PostRepository {
         Cache::forget('cached_posts');
         return Post::create($attributes);
     }
+
 }

@@ -6,6 +6,8 @@ use Illuminate\View\Component;
 
 class PostRowComponent extends Component
 {
+    public $id;
+
     public $title;
 
     public $description;
@@ -17,9 +19,10 @@ class PostRowComponent extends Component
      *
      * @return void
      */
-    public function __construct($title, $description, $publishdate)
+    public function __construct($id, $title, $description, $publishdate)
     {
         //
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->publishdate = $publishdate;

@@ -17,6 +17,6 @@ class UserSeeder extends Seeder
         /**
          * Creates 10 random users
          */
-        \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(20)->create();
     }
 }

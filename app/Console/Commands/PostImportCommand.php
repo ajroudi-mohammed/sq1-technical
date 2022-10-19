@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Post;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -13,7 +14,7 @@ class PostImportCommand extends Command
     /**
      * SQ1 endpoint
      */
-    protected $api_url;
+    protected $post_api_url;
 
     /**
      * The name and signature of the console command.
@@ -33,7 +34,7 @@ class PostImportCommand extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->api_url = env('API_URL', 'https://candidate-test.sq1.io/api.php');
+        $this->post_api_url = config('app.post_api_url');
     }
 
     /**
@@ -62,12 +63,24 @@ class PostImportCommand extends Command
     public function handle()
     {
         //Cache::forget('imported_posts_cache_ids');
+        try{
 
-        $response = Http::get($this->api_url);
-        if( $response->successful() ){
+            $response = Http::get($this->post_api_url);
+
+            //dd($response->json());
+
+            if($response->failed()){
+                return Command::FAILURE;
+            }
 
             $posts = $response->json();
-            if( isset($posts['articles']) && count($posts['articles']) > 0 ){
+
+            if( !isset($posts['articles']) ){
+                throw new Exception('Articles key not found');
+            }
+
+
+            if( count($posts['articles']) > 0 ){
                 $postsCollection = collect($posts['articles']);
                 $imported_posts_ids = Cache::get('imported_posts_cache_ids');
 
@@ -108,7 +121,13 @@ class PostImportCommand extends Command
                     Cache::put('imported_posts_cache_ids', $mergedIds);
                 }
             }
+
+
+        }catch(\Exception $e) {
+            return Command::FAILURE;
         }
+
+
         return Command::SUCCESS;
     }
 }

@@ -8,6 +8,9 @@
     <div class="overflow-x-auto">
         <div class="min-w-screen min-h-screen bg-gray-100 flex my-10 justify-center bg-gray-100 font-sans overflow-hidden">
             <div class="w-full lg:w-5/6">
+                <a href="{{route('posts.create')}}" class="bg-blue-500 mb-3 inline-block hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Create post
+                </a>
                 <div class="bg-white shadow-md rounded">
                     <table class="w-full table-auto">
                         <thead>
@@ -25,7 +28,8 @@
 
                             @foreach ($posts as $post )
 
-                                <x-post-row-component :title="$post->title"
+                                <x-post-row-component :id="$post->id"
+                                                      :title="$post->title"
                                                       :description="$post->description"
                                                       :publishdate="$post->publishedAt" />
 
