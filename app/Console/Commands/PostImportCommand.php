@@ -21,7 +21,7 @@ class PostImportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'import-posts:hourly';
+    protected $signature = 'import-posts:halfhourly';
 
     /**
      * The console command description.
@@ -51,7 +51,8 @@ class PostImportCommand extends Command
 
         });
 
-        Cache::forget('cached_posts');
+        //Cache::forget('cached_posts');
+        clear_posts_cache();
         return Post::insert($newPostCol->toArray());
     }
 
@@ -62,7 +63,7 @@ class PostImportCommand extends Command
      */
     public function handle()
     {
-        //Cache::forget('imported_posts_cache_ids');
+        Cache::forget('imported_posts_cache_ids');
         try{
 
             $response = Http::get($this->post_api_url);
@@ -79,10 +80,11 @@ class PostImportCommand extends Command
                 throw new Exception('Articles key not found');
             }
 
-
+            //Cache::flush();
             if( count($posts['articles']) > 0 ){
                 $postsCollection = collect($posts['articles']);
                 $imported_posts_ids = Cache::get('imported_posts_cache_ids');
+                //dd($postsCollection->pluck('id'));
 
                 //the first insert
                 if( !$imported_posts_ids ){
@@ -104,7 +106,6 @@ class PostImportCommand extends Command
                     //Mass insert
                     $diffPosts = $diff->map(function($item) use($postsCollection){
                         $post = collect($postsCollection->where( 'id' , '=', $item)->first());
-                        $arr['id'] = $item;
                         $arr['title'] = $post->get('title');
                         $arr['description'] = $post->get('description');
                         $arr['publishedAt'] = Carbon::parse($post->get('publishedAt'));
@@ -114,7 +115,8 @@ class PostImportCommand extends Command
                     });
 
                     Post::insert($diffPosts->toArray());
-                    Cache::forget('cached_posts');
+
+                    clear_posts_cache();
 
                     //Update cache
                     $mergedIds = $imported_posts_ids->merge($diff);

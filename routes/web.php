@@ -20,26 +20,27 @@ require __DIR__.'/auth.php';
 
 
 //Guest routes
-Route::middleware('guest')->group(function () {
-    Route::get('/', [BlogController::class, 'index']);
-});
+Route::middleware('remembercachekeys')->get('/', [BlogController::class, 'index'])->name('home');
+
 
 
 //Authenticated routes
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     /**
      * a resource generates these routes
      *
     Verb          Path                        Action  Route Name
-    GET           /users                      index   users.index
-    GET           /users/create               create  users.create
-    POST          /users                      store   users.store
-    GET           /users/{user}               show    users.show
-    GET           /users/{user}/edit          edit    users.edit
-    PUT|PATCH     /users/{user}               update  users.update
-    DELETE        /users/{user}               destroy users.destroy */
+    GET           /posts                      index   posts.index
+    GET           /posts/create               create  posts.create
+    POST          /posts                      store   posts.store
+    GET           /posts/{post}               show    posts.show
+    GET           /posts/{post}/edit          edit    posts.edit
+    PUT|PATCH     /posts/{post}               update  posts.update
+    DELETE        /posts/{post}               destroy posts.destroy */
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('posts', PostController::class);
 
 });

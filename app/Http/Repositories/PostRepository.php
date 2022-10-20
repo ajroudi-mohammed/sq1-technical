@@ -28,7 +28,6 @@ class PostRepository {
 
     public function createPost($attributes){
         $attributes['user_id'] = Auth::id();
-        Cache::forget('cached_posts');
         return Post::create($attributes);
     }
 

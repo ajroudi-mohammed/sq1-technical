@@ -3,7 +3,7 @@
         <span class="font-medium">{{$title}}</span>
     </td>
     <td class="py-3 px-6 text-left">
-        {{$description}}
+        {{Str::words($description, 10);}}
     </td>
     <td class="py-3 px-6 text-center">
         {{$publishdate}}
