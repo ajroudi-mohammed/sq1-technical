@@ -18,6 +18,6 @@ class PostSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        Post::factory(10)->create();
+        Post::factory(100000)->create();
     }
 }

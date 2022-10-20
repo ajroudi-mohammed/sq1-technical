@@ -59,34 +59,14 @@
 
             @foreach ( $posts as $post )
 
-                <article class="flex flex-col shadow my-4">
-                    <div class="bg-white flex flex-col justify-start p-6">
-                        <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{$post->title}}
-                            Amet</a>
-                        <p href="#" class="text-sm pb-3">
-                            Published {{$post->publishedAt}}
-                        </p>
-                        <a href="#" class="pb-6">{{$post->description}}.</a>
-                        <a href="#" class="uppercase text-gray-800 hover:text-black">Continue Reading <i
-                                class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+                <x-blog-post-component :title="$post->title"
+                                            :description="$post->description"
+                                            :publishedAt="$post->publishedAt" />
 
             @endforeach
 
             {{ $posts->links() }}
 
-
-            <!-- Pagination -->
-            <div class="flex items-center py-8">
-                <a href="#"
-                    class="h-10 w-10 bg-blue-800 hover:bg-blue-600 font-semibold text-white text-sm flex items-center justify-center">1</a>
-                <a href="#"
-                    class="h-10 w-10 font-semibold text-gray-800 hover:bg-blue-600 hover:text-white text-sm flex items-center justify-center">2</a>
-                <a href="#"
-                    class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3">Next
-                    <i class="fas fa-arrow-right ml-2"></i></a>
-            </div>
 
         </section>
 

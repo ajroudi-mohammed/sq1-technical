@@ -20,7 +20,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(6, true),
             'description' => fake()->text(260).'..',
             'user_id' => rand(1, 10),
-            'publishedAt' => now()
+            'publishedAt' => fake()->dateTimeBetween('-40 days' ,'now')
         ];
     }
 }
