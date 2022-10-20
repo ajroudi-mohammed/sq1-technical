@@ -55,3 +55,10 @@ User with ID = 1
 email : admin@example.com
 password : password
 ```
+
+## Post import cron
+
+To import posts every 30 minutes please run this command
+```bash
+php artisan schedule:list
+```
