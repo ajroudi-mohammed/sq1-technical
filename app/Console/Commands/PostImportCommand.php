@@ -63,7 +63,7 @@ class PostImportCommand extends Command
      */
     public function handle()
     {
-        Cache::forget('imported_posts_cache_ids');
+        //Cache::forget('imported_posts_cache_ids');
         try{
 
             $response = Http::get($this->post_api_url);

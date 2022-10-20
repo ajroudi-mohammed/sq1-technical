@@ -60,5 +60,10 @@ password : password
 
 To import posts every 30 minutes please run this command
 ```bash
-php artisan schedule:list
+php artisan schedule:work
+```
+
+To run the import immediately 
+```bash
+php artisan import-posts:halfhourly
 ```
