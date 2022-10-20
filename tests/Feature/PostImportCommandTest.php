@@ -24,7 +24,7 @@ class PostImportCommandTest extends TestCase
             config('app.post_api_url') => Http::response($this->apiResponse(), 200)
         ]);
 
-        $this->artisan('import-posts:hourly')->assertExitCode(0);
+        $this->artisan('import-posts:halfhourly')->assertExitCode(0);
     }
 
     public function test_articles_key_not_found_from_api_response()
@@ -39,7 +39,7 @@ class PostImportCommandTest extends TestCase
             config('app.post_api_url') => Http::response($response, 200)
         ]);
 
-        $this->artisan('import-posts:hourly')->assertExitCode(1);
+        $this->artisan('import-posts:halfhourly')->assertExitCode(1);
     }
 
     public function apiResponse($overrides = []){
